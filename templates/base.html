@@ -1,0 +1,93 @@
+<html>
+  <head>
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.5.0/dist/cdn.min.js"
+    ></script>
+    <script src="https://unpkg.com/htmx.org@1.6.0"></script>
+
+  </head>
+  <body>
+    <h1>Alpine Js and Htmx</h1>
+    <div x-data="{ open: true }">
+      <button @click="open=!open">Toggle</button>
+      <h3 x-show="open">Alternative to react and vue</h3>
+    </div>
+    <!-- <div x-data="{ open: false, toggle() { this.open = ! this.open } }">
+        <button @click="toggle()">Toggle Content</button>
+     
+        <div x-show="open">
+            Content...
+        </div>
+    </div> -->
+    <div x-data="dropdown">
+        <button @click="toggle">Toggle Content</button>
+     
+        <div x-show="open">
+            Content...
+        </div>
+    </div><br/>
+<!-- 
+    <div x-data="{ open: false }">
+        <button x-on:click="open = ! open">Toggle Dropdown  Transition</button>
+     
+        <div x-show="open" x-transition>
+            Dropdown Contents Transition...
+        </div>
+    </div>
+      -->
+
+      <div x-data="{ title: 'Hello' }">
+        <button
+            @click="
+                title = 'Hello World!';
+                $nextTick(() => { console.log($el.innerText) });
+            "
+            x-text="title"
+        ></button>
+    </div>
+      
+      <div x-data="{ message: '' }">
+        <!-- <input type="text" x-model.lazy="message"><br/> -->
+        <h3>Lazy</h3>
+        <input type="text" x-model.lazy="message">
+
+     
+        <span x-text="message">
+    </div>
+<div x-data="{ answer: '' }">
+    <input type="radio" value="yes" x-model="answer">
+    <input type="radio" value="no" x-model="answer">
+     
+    Answer: <span x-text="answer"></span> 
+</div><br/>
+
+<div x-data="{color: ''}">
+    <select x-model="color">
+        <template x-for="color in ['Red', 'Orange', 'Yellow']">
+            <option x-text="color"></option>
+        </template>
+    </select>
+     
+    Color: <span x-text="color"></span>
+</div><br>
+
+<div hx-boost="true">
+    <a href="index.html">Go To Page 1</a>
+  </div><br>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('dropdown', () => ({
+                open: false,
+     
+                toggle() {
+                    this.open = ! this.open
+                },
+            }))
+        })
+    </script>
+    
+  </body>
+</html>
+
